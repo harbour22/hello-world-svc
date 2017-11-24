@@ -7,16 +7,15 @@ python:
 install:
   - pip install -r requirements.txt
 # command to run tests
-script: pytest
+script:
+  - python -m unittest discover tests/
 
+before_deploy:
+  - pip install awscli --upgrade
+  - pip install awsebcli --upgrade
 deploy:
-  provider: elasticbeanstalk
-  access_key_id: $ACCESSKEYID
-  secret_access_key:
-    secure: "$SECRETACCESSKEY"
-  region: "eu-west-2"
-  app: "hello-world"
-  env: "hello-world-dev"
-  bucket_name: "elasticbeanstalk-eu-west-2-114600705412"
-  on:
+    - eb init hello-world -r eu-west-2 -p docker-17.06.2-ce
+    - eb deploy hello-world-dev
+    - eb status hello-world-dev
+    on:
     branch: master
