@@ -8,3 +8,15 @@ install:
   - pip install -r requirements.txt
 # command to run tests
 script: pytest
+
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: $ACCESSKEYID
+  secret_access_key:
+    secure: "$SECRETACCESSKEY"
+  region: "eu-west-2"
+  app: "hello-world"
+  env: "hello-world-dev"
+  bucket_name: "elasticbeanstalk-eu-west-2-114600705412"
+  on:
+    branch: master
