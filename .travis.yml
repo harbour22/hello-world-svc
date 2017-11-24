@@ -14,8 +14,6 @@ before_deploy:
   - pip install awscli --upgrade
   - pip install awsebcli --upgrade
 deploy:
-    - eb init hello-world -r eu-west-2 -p docker-17.06.2-ce
-    - eb deploy hello-world-dev
-    - eb status hello-world-dev
-    on:
-    branch: master
+  - eb init hello-world -r eu-west-2 -p docker-17.06.2-ce
+  - eb deploy hello-world-dev
+  - eb status hello-world-dev
