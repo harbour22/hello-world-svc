@@ -15,7 +15,12 @@ def api_helloworld():
 
 @app.route('/', methods = ['GET'])
 def api_default():
-    return "Home Page v1.3_final"
+    data = {
+        'text'  : 'null',
+    }
+    js = json.dumps(data)
+    response = Response(js, status=200, mimetype='application/json')
+    return response
 
 
 if __name__ == '__main__':
