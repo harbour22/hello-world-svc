@@ -16,7 +16,7 @@ def api_helloworld():
 @app.route('/', methods = ['GET'])
 def api_default():
     data = {
-        'text'  : 'null',
+        'text'  : 'nodata',
     }
     js = json.dumps(data)
     response = Response(js, status=200, mimetype='application/json')
