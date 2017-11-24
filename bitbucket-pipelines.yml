@@ -1,0 +1,18 @@
+image: python:stretch
+pipelines:
+  default:
+    - step:
+        script:
+          - pip install -r requirements.txt
+          - python -m unittest discover tests/
+  branches:
+      staging:
+        - step:
+            script:
+              - pip install -r requirements.txt
+              - python -m unittest discover tests/
+              - pip install awscli --upgrade
+              - pip install awsebcli --upgrade
+              - eb init hello-world -r eu-west-2 -p docker-17.03.2-ce
+              - eb deploy hello-world-dev
+              - eb status hello-world-dev
